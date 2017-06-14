@@ -24,4 +24,29 @@ $ TZ="America/Los_Angeles" ./run-update xoxp-XXXXXXXX-XXXXXXXX...
 
 The script will build the docker image and run the script.
 
+## Cron
+
+Best way to run this is via cron. Here's what I did:
+
+Create a script that has your token in it (and never give it to anyone).
+
+```bash
+$ mkdir -p ~/bin
+$ echo "#!/bin/bash -e
+
+export TZ=America/New_York
+/path/to/slack-status-time/run-update <your-slack-token-here>
+" > ~/bin/slack-status-update
+$ chmod +x ~/bin/slack-status-update
+$ crontab -e
+```
+
+That last command will open an editor. Put this in it:
+
+```cron
+0 * * * * ~/bin/slack-status-update
+```
+
+It should now run every hour on the hour.
+
 Enjoy!
