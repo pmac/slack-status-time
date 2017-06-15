@@ -9,4 +9,4 @@ fi
 
 docker build -t slack-status-time . > /dev/null 2>&1
 
-docker run -e "SLACK_TOKEN=$1" -e "TZ=${TZ:-America/New_York}" slack-status-time
+docker run --rm -e "SLACK_TOKEN=$1" -e "TZ=${TZ:-America/New_York}" slack-status-time
